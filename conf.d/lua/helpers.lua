@@ -1,7 +1,36 @@
 local helpers = {}
 local json = require "cjson.safe"
 
-function helpers.apiclient(httpc, api_root, auth)
+function helpers.get_cid_path()
+    local uri = ngx.var.uri
+    local _, _, cid, path = string.find(uri, "/ipfs/(%w+)(/.*)$")
+    return cid, path
+end
+
+function helpers.istable(t)
+    return type(t) == "table"
+end
+
+function helpers.isnumber(n)
+    return type(n) == "number"
+end
+
+function helpers.denied(cid, path)
+    local cid_lookup = ngx.shared.denied:get(cid)
+    if cid_lookup then
+        return cid_lookup
+    end
+    local cidpath_lookup = ngx.shared.denied:get(cid .. path)
+    if cidpath_lookup then
+        return cidpath_lookup
+    end
+end
+
+function helpers.allowed(cid)
+    return ngx.shared.allowed:get(cid)
+end
+
+function helpers.apiclient(httpc, api_root)
     local client = {}
 
     function client.get(path, params)
