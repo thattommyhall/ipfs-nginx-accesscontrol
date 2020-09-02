@@ -3,13 +3,13 @@ services:
   nginx:
     build: ./nginx
     volumes:
-        - ./conf.d:/etc/nginx/conf.d
+      - ./conf.d:/etc/nginx/conf.d
     ports:
-        - "3000:80"
+      - "3000:80"
   app:
     build: ./app
     ports:
-      - "4000:80"
+      - "5000:5000"
   ipfs:
     image: ipfs/go-ipfs:latest
     # ports:
