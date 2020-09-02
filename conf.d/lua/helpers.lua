@@ -2,6 +2,7 @@ local helpers = {}
 local json = require "cjson.safe"
 local resty_sha256 = require "resty.sha256"
 local str = require "resty.string"
+local http = require "resty.http"
 
 function helpers.sha256(s)
     local hash_lookup = ngx.shared.sha256:get(s)
@@ -83,10 +84,11 @@ function helpers.allowed(cid)
     return ngx.shared.allowed:get(cid)
 end
 
-function helpers.apiclient(httpc, api_root)
+function helpers.apiclient(api_root)
     local client = {}
 
     function client.get(path, params)
+        local httpc = http.new()
         local full_url = api_root .. path
 
         local request_params = {
