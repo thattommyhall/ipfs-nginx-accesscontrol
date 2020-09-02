@@ -1,10 +1,6 @@
-local string = require "string"
 local helpers = require "helpers"
 
-local uri = ngx.var.uri
-ngx.log(ngx.INFO, uri)
-ngx.log(ngx.INFO, string.match(uri, "/ipfs/(%a+)/"))
-local cid = string.match(uri, "/ipfs/(%w+)/")
+local cid, path = helpers.get_cid_path()
 
 if not helpers.allowed(cid) then
     ngx.exit(410)
