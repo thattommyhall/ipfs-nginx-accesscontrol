@@ -5,7 +5,8 @@ There are 3 things running:
 * app is a simple Python Flask app that serves up `/acl` for an allow/denylist
   and a `check_cid` endpoint. Note: its running in dev mode and will be
   sloooooooow, the point of only hitting it for novel CIDs is that it should not
-  matter too much. THERE IS ZERO EXPECTATION ANYONE WOULD PUT THIS IN PRODUCTION
+  matter too much. THERE IS ZERO EXPECTATION ANYONE WOULD PUT THIS PYTHON APP IN
+  PRODUCTION
 * go-ipfs for the upstream connection (commented out to benchmark the other
   stuff)
 * nginx
