@@ -41,14 +41,14 @@ dictionaries set by `lua_shared_dict` called `allow` and `deny`:
 
 For when you want to only serve a list of CIDs. Assumes a periodic refresh of
 the allow/deny dict from the api, looks if CID is allowed, then checks if
-CID/<PATH> is disallowed.
+CID/PATH is disallowed.
 
 Note if you dont `ngx.exit()` this script it goes to the next phase (ie proxying the
 backend)
 
 ### `rewrite-deny`
 
-Like allow but just looks if CID/<PATH> is denyed, more like the use case where
+Like allow but just looks if CID/PATH is denyed, more like the use case where
 you block "bad" or legally taken-down content.
 
 ### `rewrite-check`
