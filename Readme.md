@@ -60,6 +60,9 @@ Will hit the api and add into the allow/deny dict, if you can allow some
 requests to slip past, you could do the api call and dict update in another
 co-routine with `ngx.timer.at(0, fn)`
 
+Note the early `return` if the CID is allowed, that exits the processing of the
+request.
+
 # Notes
 
 The shape of the api has been tweaked a little but should not be considered
@@ -69,7 +72,8 @@ probably want to return less (maybe even just a code?) on that call.
 
 # Performance
 
-It performs ok, I took one days worth of URIs from a PL gateway and ran 20k requests (I made sure nginx only started one worker)
+It performs ok, I took one days worth of URIs from a PL gateway and ran 20k
+requests (I made sure nginx only started one worker)
 
 ## hitting the (slooooow) api
 
