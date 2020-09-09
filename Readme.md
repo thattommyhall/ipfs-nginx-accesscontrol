@@ -38,7 +38,7 @@ test harness
 Runs on every request, we have 3 strategies, all using shared (thread safe)
 dictionaries set by `lua_shared_dict` called `allow` and `deny`:
 
-### `rewrite-allow`
+### `rewrite-allow.lua`
 
 For when you want to only serve a list of CIDs. Assumes a periodic refresh of
 the allow/deny dict from the api, looks if CID is allowed, then checks if
@@ -47,12 +47,12 @@ CID/PATH is disallowed.
 Note if you dont `ngx.exit()` this script it goes to the next phase (ie proxying the
 backend)
 
-### `rewrite-deny`
+### `rewrite-deny.lua`
 
 Like allow but just looks if CID/PATH is denyed, more like the use case where
 you block "bad" or legally taken-down content.
 
-### `rewrite-check`
+### `rewrite-check.lua`
 
 This only allows/denys at the CID level (assumption you have lots of them and
 that you dont want to block paths underneath them)
